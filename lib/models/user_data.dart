@@ -22,4 +22,14 @@ class UserData {
       profilePictureUrl: json['profile_picture_url'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'username': username,
+      'biography': biography,
+      'profile_picture_url': profilePictureUrl,
+    };
+  }
 }

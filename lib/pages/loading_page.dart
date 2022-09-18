@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class LoadingPage extends StatelessWidget {
   const LoadingPage({super.key});
@@ -11,8 +9,10 @@ class LoadingPage extends StatelessWidget {
       navigationBar: CupertinoNavigationBar(
         middle: Text('InPrize'),
       ),
-      child: Center(
-        child: CupertinoActivityIndicator(),
+      child: SafeArea(
+        child: Center(
+          child: CupertinoActivityIndicator(),
+        ),
       ),
     );
   }

@@ -1,19 +1,30 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 import 'package:inprize/models/user_data.dart';
 import 'package:inprize/pages/home_page.dart';
 import 'package:inprize/pages/loading_page.dart';
 import 'package:inprize/pages/login_page.dart';
+import 'package:inprize/services/app_cache.dart';
+import 'package:inprize/services/graph_api.dart';
 
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
+
+  Future<void> checkLoginStatus() async {
+    emit(AuthLoading());
+    await AppCache.load();
+    final AccessToken? token = AppCache.instance.getAccessToken();
+    final UserData? data = AppCache.instance.getUserData();
+    if (token != null && token.isExpired == false) {
+      GraphApi.initialize(token.token);
+      emit(AuthLoaded(accessToken: token, userData: data));
+    } else {
+      emit(AuthInitial());
+    }
+  }
 
   Future<void> loginWithFacebook() async {
     emit(AuthLoading());
@@ -36,16 +47,14 @@ class AuthCubit extends Cubit<AuthState> {
     );
 
     if (result.status == LoginStatus.success) {
-      final Map<String, dynamic> accounts = await _getAccounts(
-        result.accessToken!.token,
-      );
       final AccessToken? token = result.accessToken;
-      UserData? data;
-      if (accounts['data'][0]['connected_instagram_account'] != null) {
-        data = UserData.fromJson(
-          accounts['data'][0]['connected_instagram_account'],
-        );
-      }
+      GraphApi.initialize(result.accessToken!.token);
+      final UserData? data = await GraphApi.instance.getInstagramAccount();
+      await AppCache.load();
+      await Future.wait(<Future>[
+        AppCache.instance.setAccessToken(token),
+        AppCache.instance.setUserData(data),
+      ]);
       emit(AuthLoaded(accessToken: token, userData: data));
     } else {
       emit(AuthError(loginResult: result));
@@ -54,17 +63,12 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> logOut() async {
     emit(AuthLoading());
-    await FacebookAuth.instance.logOut();
+    await Future.wait(<Future>[
+      AppCache.instance.setAccessToken(null),
+      AppCache.instance.setUserData(null),
+      FacebookAuth.instance.logOut(),
+    ]);
     emit(AuthInitial());
-  }
-
-  Future<Map<String, dynamic>> _getAccounts(String token) async {
-    Response response = await http.get(
-      Uri.parse(
-        'https://graph.facebook.com/v15.0/me/accounts?fields=connected_instagram_account{id,name,username,biography,profile_picture_url}&access_token=$token',
-      ),
-    );
-    return jsonDecode(response.body);
   }
 
   Widget get home {

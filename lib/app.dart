@@ -9,7 +9,13 @@ class InPrize extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => AuthCubit()),
+        BlocProvider(
+          create: (BuildContext context) {
+            AuthCubit auth = AuthCubit();
+            auth.checkLoginStatus();
+            return auth;
+          },
+        ),
       ],
       child: BlocBuilder<AuthCubit, AuthState>(
         builder: (BuildContext context, AuthState state) {
