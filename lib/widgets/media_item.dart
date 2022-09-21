@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:inprize/cubit/media_cubit.dart';
 import 'package:inprize/models/ig_media.dart';
 
 class MediaItem extends StatelessWidget {
@@ -8,11 +10,16 @@ class MediaItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(1),
-      child: Image.network(
-        media.mediaUrl,
-        fit: BoxFit.cover,
+    return BlocBuilder<MediaCubit, MediaState>(
+      builder: (BuildContext context, MediaState state) => Padding(
+        padding: const EdgeInsets.all(1),
+        child: GestureDetector(
+          onTap: () => context.read<MediaCubit>().selectMedia(media),
+          child: Image.network(
+            media.mediaUrl,
+            fit: BoxFit.cover,
+          ),
+        ),
       ),
     );
   }
