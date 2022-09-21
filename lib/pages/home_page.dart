@@ -26,6 +26,9 @@ class HomePage extends StatelessWidget {
       builder: (BuildContext context, AuthState state) {
         return CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
+            automaticallyImplyLeading: false,
+            automaticallyImplyMiddle: false,
+            padding: const EdgeInsetsDirectional.all(0),
             leading: CupertinoNavigationBarBackButton(
               onPressed: () => context.read<AuthCubit>().logOut(),
             ),
@@ -34,13 +37,16 @@ class HomePage extends StatelessWidget {
           child: SafeArea(
             child: Column(
               children: <Widget>[
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: _userInfoPanel(state),
-                    ),
-                  ],
+                Container(
+                  color: CupertinoTheme.of(context).barBackgroundColor,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: _userInfoPanel(state),
+                      ),
+                    ],
+                  ),
                 ),
                 const Expanded(child: MediaFeed()),
               ],
