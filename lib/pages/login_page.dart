@@ -28,7 +28,12 @@ class LoginPage extends StatelessWidget {
                           context.read<AuthCubit>().loginWithFacebook(),
                       child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 4),
-                        child: Text('Log In'),
+                        child: Text(
+                          'Log In',
+                          style: TextStyle(
+                            color: Color.fromRGBO(255, 255, 255, 1),
+                          ),
+                        ),
                       ),
                     ),
                   ),

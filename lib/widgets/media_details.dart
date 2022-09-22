@@ -13,6 +13,17 @@ class MediaDetails extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: CupertinoTheme.of(context).barBackgroundColor,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: CupertinoTheme.of(context)
+                  .textTheme
+                  .textStyle
+                  .color!
+                  .withAlpha(25),
+              blurRadius: 16,
+              spreadRadius: 4,
+            ),
+          ],
           borderRadius: BorderRadius.circular(10),
         ),
         width: 260,

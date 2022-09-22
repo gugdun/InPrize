@@ -18,7 +18,10 @@ class FacebookButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Icon(IconData(0xe255, fontFamily: 'MaterialIcons')),
+          const Icon(
+            IconData(0xe255, fontFamily: 'MaterialIcons'),
+            color: Color.fromRGBO(255, 255, 255, 1),
+          ),
           child,
         ],
       ),

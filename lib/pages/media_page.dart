@@ -25,12 +25,17 @@ class MediaPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.all(24),
                   child: MediaDetails(),
                 ),
                 CupertinoButton.filled(
                   onPressed: () {},
-                  child: const Text('Choose the winner'),
+                  child: const Text(
+                    'Choose the winner',
+                    style: TextStyle(
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                    ),
+                  ),
                 ),
               ],
             ),
