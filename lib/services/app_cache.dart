@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:inprize/models/ig_media.dart';
 import 'package:inprize/models/user_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -40,6 +41,17 @@ class AppCache {
     }
   }
 
+  List<IgMedia>? getUserFeed() {
+    String? string = preferences!.getString('user_feed');
+    if (string != null) {
+      return jsonDecode(string)
+          .map<IgMedia>((e) => IgMedia.fromJson(e))
+          .toList();
+    } else {
+      return null;
+    }
+  }
+
   Future<void> setAccessToken(AccessToken? token) async {
     if (token == null) {
       await preferences!.remove('access_token');
@@ -58,6 +70,17 @@ class AppCache {
       await preferences!.setString(
         'user_data',
         jsonEncode(data.toJson()),
+      );
+    }
+  }
+
+  Future<void> setUserFeed(List<IgMedia>? feed) async {
+    if (feed == null) {
+      await preferences!.remove('user_feed');
+    } else {
+      await preferences!.setString(
+        'user_feed',
+        jsonEncode(feed.map<Map<String, dynamic>>((e) => e.toJson()).toList()),
       );
     }
   }

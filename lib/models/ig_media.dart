@@ -34,4 +34,18 @@ class IgMedia {
       thumbnailUrl: json['thumbnail_url'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'id': id,
+      'caption': caption,
+      'like_count': likeCount,
+      'is_comment_enabled': isCommentEnabled,
+      'comments_count': commentsCount,
+      'media_type': mediaType,
+      'media_url': mediaUrl,
+      'is_shared_to_feed': isSharedToFeed,
+      'thumbnail_url': thumbnailUrl,
+    };
+  }
 }

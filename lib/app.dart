@@ -45,13 +45,10 @@ class InPrize extends StatelessWidget {
             child: CupertinoApp(
               debugShowCheckedModeBanner: false,
               title: 'InPrize',
-              builder: (BuildContext context, Widget? child) {
-                return DefaultTextStyle(
-                  style: CupertinoTheme.of(context).textTheme.textStyle,
-                  child:
-                      context.read<nav.NavigatorCubit>().currentPage(context),
-                );
-              },
+              home: WillPopScope(
+                onWillPop: () async => context.read<nav.NavigatorCubit>().pop(),
+                child: context.read<nav.NavigatorCubit>().currentPage(context),
+              ),
             ),
           );
         },

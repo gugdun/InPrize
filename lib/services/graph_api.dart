@@ -3,6 +3,7 @@ import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:inprize/models/ig_media.dart';
 import 'package:inprize/models/user_data.dart';
+import 'package:inprize/services/app_cache.dart';
 
 const String authority = 'graph.facebook.com';
 const String version = 'v15.0';
@@ -33,6 +34,11 @@ class GraphApi {
   }
 
   Future<List<IgMedia>> getUserMedia(String? id) async {
+    // Check cache
+    List<IgMedia>? feed = AppCache.instance.getUserFeed();
+    if (feed != null) {
+      return feed;
+    }
     // Send API request
     Response response = await http.get(Uri.https(
       authority,
@@ -46,9 +52,11 @@ class GraphApi {
     // Parse API response
     Map<String, dynamic> json = jsonDecode(response.body);
     if (json['data'] is List) {
-      return (json['data'] as List)
+      feed = (json['data'] as List)
           .map<IgMedia>((media) => IgMedia.fromJson(media))
           .toList();
+      AppCache.instance.setUserFeed(feed);
+      return feed;
     } else {
       return <IgMedia>[];
     }

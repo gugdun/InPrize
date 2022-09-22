@@ -31,16 +31,18 @@ class UserWidget extends StatelessWidget {
             children: <Widget>[
               Text(
                 userData.name,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
+                  color: CupertinoTheme.of(context).textTheme.textStyle.color,
                 ),
               ),
               Text(
                 userData.biography,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.normal,
+                  color: CupertinoTheme.of(context).textTheme.textStyle.color,
                 ),
               ),
             ],

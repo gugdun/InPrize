@@ -25,7 +25,10 @@ class NavigatorCubit extends Cubit<NavigatorState> {
     emit(NavigatorState(routes: state.routes, navigatorStack: stack));
   }
 
-  void pop() {
+  bool pop() {
+    if (state.navigatorStack.length == 1) {
+      return true;
+    }
     emit(NavigatorState(
       routes: state.routes,
       navigatorStack: state.navigatorStack.sublist(
@@ -33,5 +36,6 @@ class NavigatorCubit extends Cubit<NavigatorState> {
         state.navigatorStack.length - 1,
       ),
     ));
+    return false;
   }
 }

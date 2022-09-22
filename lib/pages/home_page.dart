@@ -7,16 +7,31 @@ import 'package:inprize/widgets/user_widget.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  Widget _userInfoPanel(AuthLoaded state) {
+  Widget _userInfoPanel(BuildContext context, AuthLoaded state) {
     return state.userData != null
         ? UserWidget(userData: state.userData!)
-        : const Text('No Instagram account associated with this account.');
+        : Text(
+            'No Instagram account associated with this account.',
+            style: TextStyle(
+              color: CupertinoTheme.of(context).textTheme.textStyle.color,
+            ),
+          );
   }
 
-  Widget _userName(AuthLoaded state) {
+  Widget _userName(BuildContext context, AuthLoaded state) {
     return state.userData != null
-        ? Text('@${state.userData!.username}')
-        : const Text('InPrize');
+        ? Text(
+            '@${state.userData!.username}',
+            style: TextStyle(
+              color: CupertinoTheme.of(context).textTheme.textStyle.color,
+            ),
+          )
+        : Text(
+            'InPrize',
+            style: TextStyle(
+              color: CupertinoTheme.of(context).textTheme.textStyle.color,
+            ),
+          );
   }
 
   @override
@@ -32,7 +47,7 @@ class HomePage extends StatelessWidget {
             leading: CupertinoNavigationBarBackButton(
               onPressed: () => context.read<AuthCubit>().logOut(),
             ),
-            middle: _userName(state as AuthLoaded),
+            middle: _userName(context, state as AuthLoaded),
           ),
           child: SafeArea(
             child: Column(
@@ -43,7 +58,7 @@ class HomePage extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(16),
-                        child: _userInfoPanel(state),
+                        child: _userInfoPanel(context, state),
                       ),
                     ],
                   ),
