@@ -43,11 +43,15 @@ class GraphApi {
     }
     // Send API request
     http
-        .get(Uri.https(authority, '/$version/$id/media', <String, dynamic>{
-      'fields':
-          'id,caption,like_count,is_comment_enabled,comments_count,is_shared_to_feed,media_type,media_url,thumbnail_url',
-      'access_token': token,
-    }))
+        .get(Uri.https(
+      authority,
+      '/$version/$id/media',
+      <String, dynamic>{
+        'fields':
+            'id,caption,like_count,is_comment_enabled,comments_count,is_shared_to_feed,media_type,media_url,thumbnail_url',
+        'access_token': token,
+      },
+    ))
         .then((Response response) {
       // Parse API response
       Map<String, dynamic> json = jsonDecode(response.body);
