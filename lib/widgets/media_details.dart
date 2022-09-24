@@ -27,7 +27,7 @@ class MediaDetails extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         width: 260,
-        height: 320,
+        height: 340,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

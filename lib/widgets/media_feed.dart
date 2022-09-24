@@ -15,8 +15,9 @@ class MediaFeed extends StatelessWidget {
       buildWhen: (_, __) => false,
       builder: (BuildContext context, AuthState state) {
         return StreamBuilder(
-          stream: GraphApi.instance
-              .getUserMedia((state as AuthLoaded).userData?.id),
+          stream: GraphApi.instance.getUserMedia(
+            (state as AuthLoaded).userData?.id,
+          ),
           builder: (
             BuildContext context,
             AsyncSnapshot<List<IgMedia>> snapshot,

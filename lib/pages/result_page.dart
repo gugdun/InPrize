@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inprize/cubit/media_cubit.dart';
-import 'package:inprize/widgets/media_details.dart';
+import 'package:inprize/widgets/comment_widget.dart';
 
-class MediaPage extends StatelessWidget {
-  const MediaPage({super.key});
+class ResultPage extends StatelessWidget {
+  const ResultPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,28 +18,33 @@ class MediaPage extends StatelessWidget {
             leading: CupertinoNavigationBarBackButton(
               onPressed: () => context.read<MediaCubit>().closeMedia(),
             ),
-            middle: const Text('Publication'),
+            middle: const Text('Results'),
           ),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Padding(
-                  padding: EdgeInsets.all(24),
-                  child: MediaDetails(),
+                Text(
+                  'Winner!',
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: CupertinoTheme.of(context).textTheme.textStyle.color,
+                  ),
                 ),
-                (state as MediaSelected).currentMedia.commentsCount > 0
-                    ? CupertinoButton.filled(
-                        onPressed: () =>
-                            context.read<MediaCubit>().chooseWinner(),
-                        child: const Text(
-                          'Choose the winner',
-                          style: TextStyle(
-                            color: Color.fromRGBO(255, 255, 255, 1),
-                          ),
-                        ),
-                      )
-                    : Container(),
+                const Padding(
+                  padding: EdgeInsets.only(top: 24, bottom: 32),
+                  child: CommentWidget(),
+                ),
+                CupertinoButton.filled(
+                  onPressed: () {},
+                  child: const Text(
+                    'Open profile',
+                    style: TextStyle(
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

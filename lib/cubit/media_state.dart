@@ -16,5 +16,7 @@ class MediaLoading extends MediaSelected {
 }
 
 class MediaLoaded extends MediaLoading {
-  MediaLoaded({required super.currentMedia});
+  final Comment comment;
+
+  MediaLoaded({required super.currentMedia, required this.comment});
 }
