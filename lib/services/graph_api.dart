@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -33,34 +34,37 @@ class GraphApi {
     }
   }
 
-  Future<List<IgMedia>> getUserMedia(String? id) async {
+  Stream<List<IgMedia>> getUserMedia(String? id) {
     // Check cache
     List<IgMedia>? feed = AppCache.instance.getUserFeed();
     if (feed != null) {
-      return feed;
+      Future.delayed(const Duration(), () => _userMedia.add(feed!));
+      return _userMedia.stream;
     }
     // Send API request
-    Response response = await http.get(Uri.https(
-      authority,
-      '/$version/$id/media',
-      <String, dynamic>{
-        'fields':
-            'id,caption,like_count,is_comment_enabled,comments_count,is_shared_to_feed,media_type,media_url,thumbnail_url',
-        'access_token': token,
-      },
-    ));
-    // Parse API response
-    Map<String, dynamic> json = jsonDecode(response.body);
-    if (json['data'] is List) {
-      feed = (json['data'] as List)
-          .map<IgMedia>((media) => IgMedia.fromJson(media))
-          .toList();
-      AppCache.instance.setUserFeed(feed);
-      return feed;
-    } else {
-      return <IgMedia>[];
-    }
+    http
+        .get(Uri.https(authority, '/$version/$id/media', <String, dynamic>{
+      'fields':
+          'id,caption,like_count,is_comment_enabled,comments_count,is_shared_to_feed,media_type,media_url,thumbnail_url',
+      'access_token': token,
+    }))
+        .then((Response response) {
+      // Parse API response
+      Map<String, dynamic> json = jsonDecode(response.body);
+      if (json['data'] is List) {
+        feed = (json['data'] as List)
+            .map<IgMedia>((media) => IgMedia.fromJson(media))
+            .toList();
+        AppCache.instance.setUserFeed(feed);
+        _userMedia.add(feed!);
+      } else {
+        _userMedia.add(<IgMedia>[]);
+      }
+    });
+    return _userMedia.stream;
   }
+
+  final _userMedia = StreamController<List<IgMedia>>.broadcast();
 
   static GraphApi? _instance;
 

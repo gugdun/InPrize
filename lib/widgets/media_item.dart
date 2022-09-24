@@ -16,7 +16,7 @@ class MediaItem extends StatelessWidget {
         child: GestureDetector(
           onTap: () => context.read<MediaCubit>().selectMedia(media),
           child: Image.network(
-            media.mediaUrl,
+            media.thumbnailUrl ?? media.mediaUrl,
             fit: BoxFit.cover,
           ),
         ),

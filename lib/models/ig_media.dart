@@ -1,6 +1,6 @@
 class IgMedia {
   final String id;
-  final String caption;
+  final String? caption;
   final int likeCount;
   final bool isCommentEnabled;
   final int commentsCount;

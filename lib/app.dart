@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inprize/cubit/auth_cubit.dart';
 import 'package:inprize/cubit/media_cubit.dart';

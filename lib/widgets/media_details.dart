@@ -34,16 +34,24 @@ class MediaDetails extends StatelessWidget {
             Container(
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
               clipBehavior: Clip.antiAlias,
-              child: Image.network(
-                (state as MediaSelected).currentMedia.mediaUrl,
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: Image.network(
+                  (state as MediaSelected).currentMedia.thumbnailUrl ??
+                      state.currentMedia.mediaUrl,
+                  fit: BoxFit.fitWidth,
+                ),
               ),
             ),
-            Text(
-              state.currentMedia.caption,
-              style: TextStyle(
-                color: CupertinoTheme.of(context).textTheme.textStyle.color,
-              ),
-            ),
+            state.currentMedia.caption != null
+                ? Text(
+                    state.currentMedia.caption!,
+                    style: TextStyle(
+                      color:
+                          CupertinoTheme.of(context).textTheme.textStyle.color,
+                    ),
+                  )
+                : Container(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
