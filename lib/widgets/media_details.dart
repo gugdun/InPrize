@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inprize/cubit/media_cubit.dart';
+import 'package:inprize/widgets/media_details/comment_caption.dart';
 import 'package:inprize/widgets/media_details/count_widget.dart';
 
 class MediaDetails extends StatelessWidget {
@@ -43,15 +44,7 @@ class MediaDetails extends StatelessWidget {
                 ),
               ),
             ),
-            state.currentMedia.caption != null
-                ? Text(
-                    state.currentMedia.caption!,
-                    style: TextStyle(
-                      color:
-                          CupertinoTheme.of(context).textTheme.textStyle.color,
-                    ),
-                  )
-                : Container(),
+            CommentCaption(caption: state.currentMedia.caption),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

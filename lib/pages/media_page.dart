@@ -12,8 +12,6 @@ class MediaPage extends StatelessWidget {
       builder: (BuildContext context, MediaState state) {
         return CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
-            automaticallyImplyLeading: false,
-            automaticallyImplyMiddle: false,
             padding: const EdgeInsetsDirectional.all(0),
             leading: CupertinoNavigationBarBackButton(
               onPressed: () => context.read<MediaCubit>().closeMedia(),

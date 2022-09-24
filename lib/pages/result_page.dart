@@ -2,9 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inprize/cubit/media_cubit.dart';
 import 'package:inprize/widgets/comment_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ResultPage extends StatelessWidget {
   const ResultPage({super.key});
+
+  Future<void> _openProfile(String username) async {
+    Uri app = Uri.parse('https://www.instagram.com/_u/$username/');
+    Uri browser = Uri.parse('https://www.instagram.com/$username/');
+    if (await canLaunchUrl(app)) {
+      await launchUrl(app, mode: LaunchMode.externalNonBrowserApplication);
+    } else if (await canLaunchUrl(browser)) {
+      await launchUrl(browser, mode: LaunchMode.externalApplication);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +23,6 @@ class ResultPage extends StatelessWidget {
       builder: (BuildContext context, MediaState state) {
         return CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
-            automaticallyImplyLeading: false,
-            automaticallyImplyMiddle: false,
             padding: const EdgeInsetsDirectional.all(0),
             leading: CupertinoNavigationBarBackButton(
               onPressed: () => context.read<MediaCubit>().closeMedia(),
@@ -37,7 +46,9 @@ class ResultPage extends StatelessWidget {
                   child: CommentWidget(),
                 ),
                 CupertinoButton.filled(
-                  onPressed: () {},
+                  onPressed: () => _openProfile(
+                    (state as MediaLoaded).comment.username,
+                  ),
                   child: const Text(
                     'Open profile',
                     style: TextStyle(

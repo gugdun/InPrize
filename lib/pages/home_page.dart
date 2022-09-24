@@ -41,8 +41,6 @@ class HomePage extends StatelessWidget {
       builder: (BuildContext context, AuthState state) {
         return CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
-            automaticallyImplyLeading: false,
-            automaticallyImplyMiddle: false,
             padding: const EdgeInsetsDirectional.all(0),
             leading: CupertinoNavigationBarBackButton(
               onPressed: () => context.read<AuthCubit>().logOut(),

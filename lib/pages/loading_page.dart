@@ -6,9 +6,6 @@ class LoadingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text('InPrize'),
-      ),
       child: SafeArea(
         child: Center(
           child: CupertinoActivityIndicator(),

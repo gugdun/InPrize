@@ -40,7 +40,9 @@ class CommentWidget extends StatelessWidget {
               ),
             ),
             Text(
-              state.comment.text,
+              state.comment.text.length > 45
+                  ? state.comment.text.substring(0, 45).padRight(48, '.')
+                  : state.comment.text,
               style: TextStyle(
                 color: CupertinoTheme.of(context).textTheme.textStyle.color,
               ),

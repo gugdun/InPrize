@@ -12,14 +12,39 @@ class LoginPage extends StatelessWidget {
       buildWhen: (_, __) => false,
       builder: (BuildContext context, AuthState state) {
         return CupertinoPageScaffold(
-          navigationBar: const CupertinoNavigationBar(
-            middle: Text('InPrize'),
-          ),
           child: SafeArea(
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    child: Image.asset(
+                      width: 125,
+                      height: 125,
+                      'assets/icons/launcher-icon.png',
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 16),
+                  ),
+                  Text(
+                    'InPrize',
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      color:
+                          CupertinoTheme.of(context).textTheme.textStyle.color,
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 64),
+                  ),
                   SizedBox(
                     width: 250,
                     height: 50,

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class FacebookButton extends StatelessWidget {
   final void Function()? onPressed;
@@ -18,10 +19,7 @@ class FacebookButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Icon(
-            IconData(0xe255, fontFamily: 'MaterialIcons'),
-            color: Color.fromRGBO(255, 255, 255, 1),
-          ),
+          SvgPicture.asset('assets/icons/facebook.svg'),
           child,
         ],
       ),
