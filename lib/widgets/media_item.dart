@@ -18,6 +18,7 @@ class MediaItem extends StatelessWidget {
           child: Image.network(
             media.thumbnailUrl ?? media.mediaUrl,
             fit: BoxFit.cover,
+            cacheWidth: 200,
           ),
         ),
       ),

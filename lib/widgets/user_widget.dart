@@ -22,6 +22,7 @@ class UserWidget extends StatelessWidget {
           child: Image.network(
             userData.profilePictureUrl,
             fit: BoxFit.cover,
+            cacheWidth: 200,
           ),
         ),
         Padding(

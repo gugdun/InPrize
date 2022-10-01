@@ -41,6 +41,7 @@ class MediaDetails extends StatelessWidget {
                   (state as MediaSelected).currentMedia.thumbnailUrl ??
                       state.currentMedia.mediaUrl,
                   fit: BoxFit.fitWidth,
+                  cacheWidth: 400,
                 ),
               ),
             ),

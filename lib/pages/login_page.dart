@@ -27,6 +27,7 @@ class LoginPage extends StatelessWidget {
                     child: Image.asset(
                       width: 125,
                       height: 125,
+                      cacheWidth: 300,
                       'assets/icons/launcher-icon.png',
                     ),
                   ),
