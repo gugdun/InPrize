@@ -47,18 +47,21 @@ class MediaDetails extends StatelessWidget {
             if (state.currentMedia.caption != null &&
                 state.currentMedia.caption!.isNotEmpty)
               CommentCaption(caption: state.currentMedia.caption!),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                CountWidget(
-                  icon: CupertinoIcons.heart,
-                  count: state.currentMedia.likeCount,
-                ),
-                CountWidget(
-                  icon: CupertinoIcons.bubble_right,
-                  count: state.currentMedia.commentsCount,
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(top: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CountWidget(
+                    icon: CupertinoIcons.heart,
+                    count: state.currentMedia.likeCount,
+                  ),
+                  CountWidget(
+                    icon: CupertinoIcons.bubble_right,
+                    count: state.currentMedia.commentsCount,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
