@@ -6,6 +6,8 @@ import 'package:inprize/cubit/auth_cubit.dart';
 import 'package:inprize/cubit/navigator_cubit.dart';
 import 'package:inprize/models/ig_media.dart';
 import 'package:inprize/models/comment.dart';
+import 'package:inprize/pages.dart';
+import 'package:inprize/services/ad_service.dart';
 import 'package:inprize/services/graph_api.dart';
 
 part 'media_state.dart';
@@ -18,7 +20,7 @@ class MediaCubit extends Cubit<MediaState> {
   Future<void> chooseWinner(AuthLoaded auth) async {
     // Display loading screen
     emit(MediaLoading(currentMedia: (state as MediaSelected).currentMedia));
-    navigator.push('/loading');
+    navigator.push(loadingPage);
 
     // Load comments and pick random
     List<Comment> comments = await GraphApi.instance.getMediaComments(
@@ -35,17 +37,22 @@ class MediaCubit extends Cubit<MediaState> {
       currentMedia: (state as MediaSelected).currentMedia,
       comment: winner,
     ));
-    navigator.replace('/home');
-    navigator.push('/result');
+    navigator.replace(homePage);
+    navigator.push(resultPage);
   }
 
   void selectMedia(IgMedia media) {
     emit(MediaSelected(currentMedia: media));
-    navigator.push('/media');
+    navigator.push(mediaPage);
   }
 
   void closeMedia() {
     emit(MediaInitial());
     navigator.pop();
+  }
+
+  void closeResults() {
+    closeMedia();
+    AdService.instance.showInterstitial();
   }
 }

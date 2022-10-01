@@ -1,7 +1,7 @@
 name: inprize
 description: Instagram giveaway randomizer.
 publish_to: 'none'
-version: 1.0.1+2
+version: 1.0.2+2
 
 environment:
   sdk: '>=2.18.0 <3.0.0'
@@ -17,6 +17,7 @@ dependencies:
   http: ^0.13.5
   flutter_facebook_auth: ^4.4.1+1
   url_launcher: ^6.1.5
+  stack_appodeal_flutter: ^3.0.0
 
 dev_dependencies:
   flutter_test:

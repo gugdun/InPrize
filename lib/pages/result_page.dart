@@ -25,7 +25,7 @@ class ResultPage extends StatelessWidget {
           navigationBar: CupertinoNavigationBar(
             padding: const EdgeInsetsDirectional.all(0),
             leading: CupertinoNavigationBarBackButton(
-              onPressed: () => context.read<MediaCubit>().closeMedia(),
+              onPressed: () => context.read<MediaCubit>().closeResults(),
             ),
             middle: const Text('Results'),
           ),

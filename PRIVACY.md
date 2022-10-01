@@ -1,6 +1,6 @@
 **Privacy Policy**
 
-Bochko Maksim built the InPrize app as an Ad Supported app. This SERVICE is provided by Bochko Maksim at no cost and is intended for use as is.
+gugdun built the InPrize app as an Ad Supported app. This SERVICE is provided by gugdun at no cost and is intended for use as is.
 
 This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
 
@@ -10,14 +10,14 @@ The terms used in this Privacy Policy have the same meanings as in our Terms and
 
 **Information Collection and Use**
 
-For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information, including but not limited to Email, Facebook account info, Instagram account info, Instagram media. The information that I request will be retained on your device and is not collected by me in any way.
+For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information, including but not limited to Email, Facebook account information, Instagram account information, Instagram user media. The information that I request will be retained on your device and is not collected by me in any way.
 
 The app does use third-party services that may collect information used to identify you.
 
 Link to the privacy policy of third-party service providers used by the app
 
-*   [AdMob](https://support.google.com/admob/answer/6128543?hl=en)
 *   [Facebook](https://www.facebook.com/about/privacy/update/printable)
+*   [Appodeal](https://www.appodeal.com/home/privacy-policy/)
 
 **Log Data**
 
@@ -56,7 +56,7 @@ These Services do not address anyone under the age of 13. I do not knowingly col
 
 I may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Privacy Policy on this page.
 
-This policy is effective as of 2022-09-24
+This policy is effective as of 2022-10-01
 
 **Contact Us**
 

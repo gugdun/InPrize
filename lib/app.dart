@@ -8,6 +8,8 @@ import 'package:inprize/pages/loading_page.dart';
 import 'package:inprize/pages/login_page.dart';
 import 'package:inprize/pages/media_page.dart';
 import 'package:inprize/pages/result_page.dart';
+import 'package:inprize/services/ad_service.dart';
+import 'package:inprize/pages.dart';
 
 class InPrize extends StatelessWidget {
   const InPrize({super.key});
@@ -17,11 +19,11 @@ class InPrize extends StatelessWidget {
     return BlocProvider<nav.NavigatorCubit>(
       create: (context) => nav.NavigatorCubit(
         {
-          '/': (BuildContext context) => const LoginPage(),
-          '/loading': (BuildContext context) => const LoadingPage(),
-          '/home': (BuildContext context) => const HomePage(),
-          '/media': (BuildContext context) => const MediaPage(),
-          '/result': (BuildContext context) => const ResultPage(),
+          loginPage: (BuildContext context) => const LoginPage(),
+          loadingPage: (BuildContext context) => const LoadingPage(),
+          homePage: (BuildContext context) => const HomePage(),
+          mediaPage: (BuildContext context) => const MediaPage(),
+          resultPage: (BuildContext context) => const ResultPage(),
         },
         '/',
       ),
@@ -48,7 +50,11 @@ class InPrize extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'InPrize',
               home: WillPopScope(
-                onWillPop: () async => context.read<nav.NavigatorCubit>().pop(),
+                onWillPop: () async {
+                  String page = context.read<nav.NavigatorCubit>().pop();
+                  if (page == resultPage) AdService.instance.showInterstitial();
+                  return page == homePage || page == loginPage;
+                },
                 child: context.read<nav.NavigatorCubit>().currentPage(context),
               ),
             ),

@@ -32,7 +32,7 @@ class CommentWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: 12),
               child: Text(
                 (state as MediaLoaded).comment.username,
                 style: TextStyle(
@@ -50,7 +50,7 @@ class CommentWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8),
+              padding: const EdgeInsets.only(top: 12),
               child: CountWidget(
                 icon: CupertinoIcons.heart,
                 count: state.comment.likeCount,

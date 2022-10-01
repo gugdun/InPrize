@@ -25,17 +25,16 @@ class NavigatorCubit extends Cubit<NavigatorState> {
     emit(NavigatorState(routes: state.routes, navigatorStack: stack));
   }
 
-  bool pop() {
-    if (state.navigatorStack.length == 1) {
-      return true;
+  String pop() {
+    String lastPage = state.navigatorStack.last;
+    List<String> stack =
+        state.navigatorStack.sublist(0, state.navigatorStack.length - 1);
+    if (stack.isNotEmpty) {
+      emit(NavigatorState(
+        routes: state.routes,
+        navigatorStack: stack,
+      ));
     }
-    emit(NavigatorState(
-      routes: state.routes,
-      navigatorStack: state.navigatorStack.sublist(
-        0,
-        state.navigatorStack.length - 1,
-      ),
-    ));
-    return false;
+    return lastPage;
   }
 }
