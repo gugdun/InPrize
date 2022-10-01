@@ -27,29 +27,34 @@ class CommentWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         width: 260,
-        height: 150,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              (state as MediaLoaded).comment.username,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: CupertinoTheme.of(context).textTheme.textStyle.color,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(
+                (state as MediaLoaded).comment.username,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: CupertinoTheme.of(context).textTheme.textStyle.color,
+                ),
               ),
             ),
             Text(
-              state.comment.text.length > 45
-                  ? state.comment.text.substring(0, 45).padRight(48, '.')
-                  : state.comment.text,
+              state.comment.text,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: CupertinoTheme.of(context).textTheme.textStyle.color,
               ),
             ),
-            CountWidget(
-              icon: CupertinoIcons.heart,
-              count: state.comment.likeCount,
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: CountWidget(
+                icon: CupertinoIcons.heart,
+                count: state.comment.likeCount,
+              ),
             ),
           ],
         ),

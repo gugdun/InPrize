@@ -22,6 +22,7 @@ class HomePage extends StatelessWidget {
     return state.userData != null
         ? Text(
             '@${state.userData!.username}',
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
               color: CupertinoTheme.of(context).textTheme.textStyle.color,
             ),
@@ -52,13 +53,9 @@ class HomePage extends StatelessWidget {
               children: <Widget>[
                 Container(
                   color: CupertinoTheme.of(context).barBackgroundColor,
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: _userInfoPanel(context, state),
-                      ),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: _userInfoPanel(context, state),
                   ),
                 ),
                 const Expanded(child: MediaFeed()),

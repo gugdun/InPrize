@@ -28,7 +28,6 @@ class MediaDetails extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         width: 260,
-        height: 340,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -45,7 +44,9 @@ class MediaDetails extends StatelessWidget {
                 ),
               ),
             ),
-            CommentCaption(caption: state.currentMedia.caption),
+            if (state.currentMedia.caption != null &&
+                state.currentMedia.caption!.isNotEmpty)
+              CommentCaption(caption: state.currentMedia.caption!),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
