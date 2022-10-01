@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inprize/cubit/media_cubit.dart';
+import 'package:inprize/widgets/choose_button.dart';
 import 'package:inprize/widgets/media_details.dart';
 
 class MediaPage extends StatelessWidget {
@@ -27,16 +28,7 @@ class MediaPage extends StatelessWidget {
                   child: MediaDetails(),
                 ),
                 (state as MediaSelected).currentMedia.commentsCount > 0
-                    ? CupertinoButton.filled(
-                        onPressed: () =>
-                            context.read<MediaCubit>().chooseWinner(),
-                        child: const Text(
-                          'Choose the winner',
-                          style: TextStyle(
-                            color: Color.fromRGBO(255, 255, 255, 1),
-                          ),
-                        ),
-                      )
+                    ? const ChooseButton()
                     : Container(),
               ],
             ),

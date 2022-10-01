@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:inprize/cubit/auth_cubit.dart';
 import 'package:inprize/cubit/navigator_cubit.dart';
 import 'package:inprize/models/ig_media.dart';
 import 'package:inprize/models/comment.dart';
@@ -14,7 +15,7 @@ class MediaCubit extends Cubit<MediaState> {
 
   MediaCubit({required this.navigator}) : super(MediaInitial());
 
-  Future<void> chooseWinner() async {
+  Future<void> chooseWinner(AuthLoaded auth) async {
     // Display loading screen
     emit(MediaLoading(currentMedia: (state as MediaSelected).currentMedia));
     navigator.push('/loading');
@@ -24,7 +25,10 @@ class MediaCubit extends Cubit<MediaState> {
       (state as MediaSelected).currentMedia.id,
     );
     final random = Random();
-    final winner = comments[random.nextInt(comments.length)];
+    var winner = comments[random.nextInt(comments.length)];
+    while (winner.username == auth.userData!.username) {
+      winner = comments[random.nextInt(comments.length)];
+    }
 
     // Display results screen
     emit(MediaLoaded(
