@@ -14,6 +14,15 @@ class CountWidget extends StatelessWidget {
     this.padding = 8,
   });
 
+  String _countToString(int count) {
+    if (count >= 1000000) {
+      return '${(count / 1000000.0).toStringAsFixed(1)}M';
+    } else if (count >= 1000) {
+      return '${(count / 1000.0).toStringAsFixed(1)}K';
+    }
+    return count.toStringAsFixed(0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -24,7 +33,7 @@ class CountWidget extends StatelessWidget {
         ),
         Padding(padding: EdgeInsets.only(left: padding)),
         Text(
-          '$count',
+          _countToString(count),
           style: TextStyle(
             color: CupertinoTheme.of(context).textTheme.textStyle.color,
           ),
