@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:inprize/models/user_data.dart';
 
@@ -19,10 +20,17 @@ class UserWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(32),
           ),
           clipBehavior: Clip.antiAlias,
-          child: Image.network(
-            userData.profilePictureUrl,
+          child: CachedNetworkImage(
+            imageUrl: userData.profilePictureUrl,
+            placeholder: (BuildContext context, String url) =>
+                const CupertinoActivityIndicator(),
+            errorWidget: (BuildContext context, String url, _) => const Icon(
+              CupertinoIcons.exclamationmark_circle,
+              color: Color.fromRGBO(255, 0, 0, 1),
+            ),
             fit: BoxFit.cover,
-            cacheWidth: 200,
+            memCacheWidth: 200,
+            maxWidthDiskCache: 200,
           ),
         ),
         Expanded(

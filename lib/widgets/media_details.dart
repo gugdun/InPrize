@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inprize/cubit/media_cubit.dart';
@@ -36,11 +37,20 @@ class MediaDetails extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               child: AspectRatio(
                 aspectRatio: 1,
-                child: Image.network(
-                  (state as MediaSelected).currentMedia.thumbnailUrl ??
-                      state.currentMedia.mediaUrl,
+                child: CachedNetworkImage(
+                  imageUrl:
+                      (state as MediaSelected).currentMedia.thumbnailUrl ??
+                          state.currentMedia.mediaUrl,
+                  placeholder: (BuildContext context, String url) =>
+                      const CupertinoActivityIndicator(),
+                  errorWidget: (BuildContext context, String url, _) =>
+                      const Icon(
+                    CupertinoIcons.exclamationmark_circle,
+                    color: Color.fromRGBO(255, 0, 0, 1),
+                  ),
                   fit: BoxFit.fitWidth,
-                  cacheWidth: 400,
+                  memCacheWidth: 400,
+                  maxWidthDiskCache: 400,
                 ),
               ),
             ),

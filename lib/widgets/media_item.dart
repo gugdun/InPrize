@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inprize/cubit/media_cubit.dart';
@@ -15,10 +16,17 @@ class MediaItem extends StatelessWidget {
         padding: const EdgeInsets.all(1),
         child: GestureDetector(
           onTap: () => context.read<MediaCubit>().selectMedia(media),
-          child: Image.network(
-            media.thumbnailUrl ?? media.mediaUrl,
+          child: CachedNetworkImage(
+            imageUrl: media.thumbnailUrl ?? media.mediaUrl,
+            placeholder: (BuildContext context, String url) =>
+                const CupertinoActivityIndicator(),
+            errorWidget: (BuildContext context, String url, _) => const Icon(
+              CupertinoIcons.exclamationmark_circle,
+              color: Color.fromRGBO(255, 0, 0, 1),
+            ),
             fit: BoxFit.cover,
-            cacheWidth: 200,
+            memCacheWidth: 200,
+            maxWidthDiskCache: 200,
           ),
         ),
       ),
