@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
     return state.userData != null
         ? UserWidget(userData: state.userData!)
         : Text(
-            'No Instagram account associated with this account.',
+            'No Instagram Business account associated with this Facebook account.',
             style: TextStyle(
               color: CupertinoTheme.of(context).textTheme.textStyle.color,
             ),

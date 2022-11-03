@@ -26,9 +26,10 @@ class GraphApi {
         'access_token': _token,
       },
     ));
+    print(response.body);
     // Parse API response
     Map<String, dynamic> json = jsonDecode(response.body);
-    if (json['data']?[0]?['connected_instagram_account'] != null) {
+    if (json["data"].length > 0 && json["data"][0]['connected_instagram_account'] != null) {
       return UserData.fromJson(json['data'][0]['connected_instagram_account']);
     } else {
       return null;
