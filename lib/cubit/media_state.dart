@@ -11,6 +11,12 @@ class MediaSelected extends MediaState {
   MediaSelected({required this.currentMedia});
 }
 
+class MediaError extends MediaSelected {
+  final String errorMessage;
+
+  MediaError({required super.currentMedia, required this.errorMessage});
+}
+
 class MediaLoading extends MediaSelected {
   MediaLoading({required super.currentMedia});
 }

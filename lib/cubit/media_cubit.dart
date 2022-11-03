@@ -22,10 +22,23 @@ class MediaCubit extends Cubit<MediaState> {
     emit(MediaLoading(currentMedia: (state as MediaSelected).currentMedia));
     navigator.push(loadingPage);
 
-    // Load comments and pick random
+    // Load comments list
     List<Comment> comments = await GraphApi.instance.getMediaComments(
       (state as MediaSelected).currentMedia.id,
     );
+
+    // Check if publication has only one comment by user
+    if (comments.length == 1 &&
+        comments[0].username == auth.userData!.username) {
+      emit(MediaError(
+        currentMedia: (state as MediaSelected).currentMedia,
+        errorMessage: "There are not enough comments to choose a winner",
+      ));
+      navigator.pop();
+      return;
+    }
+
+    // Pick random comment
     final random = Random();
     var winner = comments[random.nextInt(comments.length)];
     while (winner.username == auth.userData!.username) {
