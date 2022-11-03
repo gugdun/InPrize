@@ -36,17 +36,9 @@ class AuthCubit extends Cubit<AuthState> {
 
     final LoginResult result = await FacebookAuth.instance.login(
       permissions: [
-        'user_posts',
-        'openid',
-        'email',
-        'pages_show_list',
         'instagram_basic',
-        'page_events',
         'pages_read_engagement',
-        'pages_manage_metadata',
-        'pages_read_user_content',
-        'pages_manage_posts',
-        'pages_manage_engagement',
+        'pages_show_list',
         'public_profile',
       ],
     );
