@@ -24,6 +24,7 @@ class AdService {
     );
     Appodeal.disableNetwork('notsy');
     Appodeal.disableNetwork('a4g');
+    Appodeal.disableNetwork('my_target');
     Appodeal.setUseSafeArea(true);
     Appodeal.setInterstitialCallbacks(
       onInterstitialLoaded: (isPrecache) =>

@@ -83,6 +83,6 @@ dependencies {
         exclude group: 'com.appodeal.ads.sdk.services', module: 'appsflyer'
         exclude group: 'com.appodeal.ads.sdk.services', module: 'firebase'
         exclude group: 'com.appodeal.ads.sdk.services', module: 'facebook_analytics'
+        exclude group: 'com.appodeal.ads.sdk.networks', module: 'my_target'
     }
-    implementation 'com.my.tracker:mytracker-sdk:3.0.9'
 }
