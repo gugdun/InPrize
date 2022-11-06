@@ -1,0 +1,56 @@
+baseURL = "https://gugdun.github.io/inprize/"
+# include content marked as draft
+buildDrafts = false
+# include content with publishdate in the future
+buildFuture = false
+# include content already expired
+buildExpired = false
+# enable this to make all relative URLs relative to content root. Note that this does not affect absolute URLs.
+relativeURLs = true
+disableRSS = true
+enableRobotsTXT = true
+editor = "vim"
+languageCode = "en"
+language = "en"
+theme = "vncnt-hugo"
+title = "InPrize"
+
+_merge = "none"
+
+[permalinks]
+  fixed = ":title/"
+  posts = "posts/:slug/"
+
+[params]
+  author = "InPrize"
+  # email does still work but is deprecated.
+  # use [params.contact.email] instead.
+  #email = "john.doe@example.com"
+  description = "InPrize application page."
+  bio = "Free Instagram giveaway randomizer. 🎁     \n It is very easy to use! **Try it on Google Play.**"
+  avatar = "img/inprize.png"
+  favicon = "img/favicon.ico"
+  error404 = "There is no such page."
+
+  [params.contact]
+    github = "https://github.com/gugdun/inprize"
+    google-play = "https://play.google.com/store/apps/details?id=com.gugdun.inprize"
+    #twitter = "https://twitter.com/jdoe"
+    
+    # You may use (inline) tables for more versatility
+    # This allows sorting and even more icons.
+    # Just make sure not to mix key-value pairs, inline tables and tables,
+    # although keeping keeping this order is ok.
+    # See https://toml.io/en/v1.0.0 for details
+    #0 = { name = "ello", icon = "ello", style = "fab", link = "" } # empty links are relative to site root
+    #[params.contact.1] # key names are sorted lexicographically
+    #  name = "hiking club" # may be omitted. defaults to key name
+    #  icon = "hiking" # may be omitted. defaults to key name
+    #  style = "fas" # may be omitted. default = "fas"
+    #  link = "https://local-hiking.club"
+    #[params.contact.email]
+    #  name = "email" # may be omitted. defaults to key name
+    #  icon = "envelope" # may be omitted. defaults to key name
+    #  style = "fas" # may be omitted. default = "fas"
+    #  link = "mailto:john.doe@example.com"
+      
